@@ -1,0 +1,140 @@
+body.fim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3.5vh, 2.5rem);
+  padding: 1.5rem 1rem;
+  background: #000;
+}
+
+/* ---------- Cartão do brinde ---------- */
+.brinde {
+  width: min(560px, 100%);
+  padding: clamp(16px, 3vw, 28px);
+  text-align: center;
+  font-family: komika, sans-serif;
+  color: var(--marrom);
+  background: linear-gradient(180deg, var(--bege-claro) 0%, var(--bege) 100%);
+  border: 4px solid var(--marrom);
+  border-radius: clamp(20px, 4vw, 36px);
+  box-shadow: 6px 6px rgb(45, 33, 1);
+  animation: fadeIn .8s ease;
+}
+.brinde h1 {
+  margin: 0 0 .3em;
+  font-size: clamp(1.25rem, 5vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.brinde .intro { margin: 0 0 1em; font-size: clamp(.9rem, 3.6vw, 1.05rem); }
+
+.passos {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin: 0 0 1.2em;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.passo {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  min-height: 48px;
+  padding: .5rem .9rem;
+  font-size: clamp(.9rem, 3.6vw, 1.05rem);
+  line-height: 1.25;
+  background: rgba(255, 255, 255, .6);
+  border: 2px solid var(--borda);
+  border-radius: 16px;
+}
+label.passo { cursor: pointer; touch-action: manipulation; }
+.passo input {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin: 0;
+  accent-color: #2e8b2e;
+  cursor: pointer;
+}
+.passo .marca {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  color: #fff;
+  font-weight: 700;
+  background: #2e8b2e;
+  border-radius: 4px;
+}
+.passo.feito { background: rgba(198, 239, 198, .7); border-color: #2e8b2e; }
+label.passo:has(input:checked) { background: rgba(198, 239, 198, .7); border-color: #2e8b2e; }
+
+.brinde .instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  min-height: 48px;
+  padding: .5rem 1.4rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  color: var(--marrom);
+  text-decoration: none;
+  background: var(--dourado);
+  border: 2px solid var(--borda);
+  border-radius: 999px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .2);
+  touch-action: manipulation;
+  transition: transform .3s ease, background-color .3s ease;
+}
+.brinde .instagram-link .bi { font-size: 1.5rem; }
+@media (hover: hover) {
+  .brinde .instagram-link:hover { background: var(--dourado-hover); transform: scale(1.05); }
+}
+.brinde .dica { margin: .8em 0 0; font-size: .85rem; opacity: .85; }
+
+/* Aparece quando os dois passos estão marcados */
+.liberado {
+  display: flex;
+  flex-direction: column;
+  gap: .25em;
+  margin-top: 1.2em;
+  padding: .8em 1em;
+  font-size: clamp(.9rem, 3.6vw, 1.05rem);
+  color: #14501a;
+  background: #d9f5d9;
+  border: 3px solid #2e8b2e;
+  border-radius: 16px;
+  animation: surgir .5s ease;
+}
+.liberado[hidden] { display: none; }
+.liberado strong { font-size: 1.2em; }
+@keyframes surgir {
+  from { opacity: 0; transform: scale(.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brinde, .liberado { animation: none; }
+}
+
+/* ---------- Agradecimento ---------- */
+.agradecimento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3em;
+  color: #fff;
+  font-family: komika, sans-serif;
+  font-size: clamp(1.1rem, calc(var(--u) * 1.8), 2.4rem);
+  text-align: center;
+  text-decoration: none;
+  padding: .5em 1em;
+  touch-action: manipulation;
+}
+.agradecimento strong { font-weight: 700; }
+@media (hover: hover) {
+  .agradecimento:hover span { text-decoration: underline; }
+}

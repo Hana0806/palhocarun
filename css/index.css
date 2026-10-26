@@ -1,0 +1,50 @@
+.tela-inicial {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.cenario {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 6vh, 3.5rem);
+  padding: clamp(3rem, 20vh, 10rem) 1rem 2rem;
+  text-align: center;
+  background: #000 url("../imagens/cenario.jpeg") center / cover no-repeat;
+}
+
+.titulo {
+  margin: 0;
+  color: #f0d18d;
+  font-family: komika, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, calc(var(--u) * 6), 7.2rem);
+  line-height: 1.05;
+  text-shadow: max(2px, calc(var(--u) * .3)) max(2px, calc(var(--u) * .3)) black;
+}
+
+.botao {
+  margin-top: clamp(0px, 5vh, 70px);
+  padding: .55em 1.4em;
+  background: var(--bege);
+  color: var(--marrom);
+  font-family: komika, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.15rem, calc(var(--u) * 2), 2.4rem);
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: max(3px, calc(var(--u) * .5)) max(3px, calc(var(--u) * .5)) rgba(0, 0, 0, .3);
+  touch-action: manipulation;
+  transition: transform .2s ease;
+}
+@media (hover: hover) {
+  .botao:hover { color: var(--marrom); transform: scale(1.05); }
+}
+.botao:active { transform: scale(.96); }
+
+@media (orientation: portrait) {
+  .titulo { font-size: clamp(2.6rem, calc(var(--u) * 7.5), 5rem); }
+}

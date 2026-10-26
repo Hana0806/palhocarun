@@ -1,0 +1,114 @@
+/* =========================================================
+   Cenário compartilhado pelas telas de jogo (diálogo + corrida)
+   ========================================================= */
+
+body.tela-jogo {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Temas: céu + chão */
+body.dia {
+  --ceu: linear-gradient(#87ceeb, #e0f6ff);
+  --chao: rgb(35, 160, 35);
+  --chao-h: max(12px, calc(var(--u) * 1.55));
+}
+body.por-do-sol {
+  --ceu: linear-gradient(#ffc7dd, #fab35c);
+  --chao: rgb(12, 55, 12);
+  --chao-h: max(8px, calc(var(--u) * .8));
+}
+body.noite {
+  --ceu: linear-gradient(#173083, #6d7bc1);
+  --chao: rgb(17, 78, 17);
+  --chao-h: max(12px, calc(var(--u) * 1.55));
+}
+
+.jogo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ceu);
+  border-bottom: var(--chao-h) solid var(--chao);
+  --pulo-h: calc(var(--u) * 17);
+}
+
+.jogo img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Personagem (todos do mesmo tamanho) */
+.personagem {
+  position: absolute;
+  bottom: 0;
+  left: var(--personagem-x, 15vw);
+  width: calc(var(--u) * 12);
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+}
+.personagem:not([src]) { visibility: hidden; }
+
+/* Pulo (usa transform: mais leve no celular) */
+.personagem.pulo { animation: pulo var(--pulo-ms, 700ms) ease-out; }
+@keyframes pulo {
+  0%, 100% { transform: translateY(0); }
+  40%, 60% { transform: translateY(calc(var(--pulo-h) * -1)); }
+}
+
+/* Elementos de cenário */
+.nuvem  { position: absolute; z-index: 0; top: 10vh; right: 20vw; width: calc(var(--u) * 25); height: auto; }
+.nuvem2 { top: 18vh; right: 65vw; }
+
+.sol {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: 40%;
+  width: calc(var(--u) * 13);
+  height: auto;
+}
+.lua {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: var(--lua-x, 0);
+  width: calc(var(--u) * 18);
+  height: auto;
+}
+.coqueiro {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: min(calc(var(--u) * 22), 40vw);
+  height: auto;
+}
+
+.estrelas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: #ffeb3b;
+  border-radius: 50%;
+  box-shadow:
+    5vw 10vh white,   15vw 30vh #fff9c4, 25vw 50vh #ffe082, 35vw 70vh white,
+    45vw 20vh #ffeb3b, 55vw 60vh white,  65vw 15vh #fff176, 75vw 40vh white,
+    85vw 80vh #ffeb3b, 95vw 25vh white,  10vw 60vh #fff59d, 20vw 15vh #ffeb3b,
+    30vw 35vh white,  40vw 75vh #fff176, 50vw 5vh white,    60vw 45vh #ffe082,
+    70vw 25vh white,  80vw 55vh #fff9c4, 90vw 10vh white,   100vw 65vh #ffeb3b;
+}
+
+/* Quem respeita "reduzir movimento" não vê nuvens correndo */
+@media (prefers-reduced-motion: reduce) {
+  .nuvem { animation: none !important; }
+}

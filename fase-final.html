@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/jogo.css">
+  <link rel="stylesheet" href="css/dialogo.css">
+  <title>Gameplay</title>
+  <script src="js/dialogo.js" defer></script>
+</head>
+<body class="tela-jogo noite" data-alvo="o baú" data-imagem-colisao="imagens/aberto.png">
+
+  <a href="jogotres.html" class="back-button fixo" title="Voltar" aria-label="Voltar"><i class="bi bi-arrow-left-short"></i></a>
+
+  <div class="jogo" id="jogo">
+    <div class="estrelas"></div>
+    <img src="imagens/lua.png" alt="" class="lua" style="--lua-x: 5%;">
+    <img class="personagem" id="personagem" alt="personagem">
+    <img src="imagens/bau.png" alt="Baú" class="npc bau" id="npc">
+    <div id="mensagem-npc" class="mensagem-npc">
+      <h3 id="texto">
+        Você conseguiu!<br>
+        Depois de superar os três caminhos, você finalmente encontrou o tesouro...<br>
+        Dentro do baú está a Receita Secreta e também um BRINDE para você! 🎁<br>
+        Para resgatar, é só seguir a gente no Instagram e curtir uma publicação.<br>
+        🏆 Parabéns, aventureiro(a)!
+      </h3>
+      <a href="fim.html" id="botaoContinuar" class="botao-ui">Resgatar brinde</a>
+    </div>
+  </div>
+
+  <div id="tutorial"></div>
+</body>
+</html>

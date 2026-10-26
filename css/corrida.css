@@ -1,0 +1,154 @@
+/* =========================================================
+   Telas de corrida (jogo, jogodois, jogotres)
+   ========================================================= */
+
+/* Dificuldade/tamanho por fase
+   --vel = tempo que o obstáculo leva para cruzar a tela (maior = mais lento) */
+body.dia        { --obst-w: calc(var(--u) * 6);  --vel: 1.15s; --pulo-ms: 700ms; }
+body.por-do-sol { --obst-w: calc(var(--u) * 8);  --vel: 1.05s; --pulo-ms: 700ms; --personagem-x: 10vw; }
+body.por-do-sol .jogo { --pulo-h: calc(var(--u) * 16); }
+body.noite      { --obst-w: calc(var(--u) * 11); --vel: .95s;  --pulo-ms: 600ms; }
+body.noite .jogo { --pulo-h: calc(var(--u) * 16); }
+
+/* Obstáculo (barril / bandeira / pedra) */
+.obstaculo {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: var(--obst-w);
+  height: auto;
+  z-index: 2;
+  will-change: transform;
+}
+.obstaculo.animar { animation: correr var(--vel) linear infinite; }
+@keyframes correr {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100vw - 100%)); }
+}
+
+/* Nuvens passando */
+.jogo .nuvem {
+  top: 16vh;
+  right: auto;
+  left: 100%;
+  width: calc(var(--u) * 26);
+  animation: moverNuvem 20s linear infinite;
+}
+@keyframes moverNuvem {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100vw - 100%)); }
+}
+
+/* Placar */
+.pontuacao {
+  position: fixed;
+  z-index: 9999;
+  top: max(14px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 2 * (var(--btn) + 28px));
+  padding: .4em 1.1em;
+  font-size: clamp(14px, calc(var(--u) * 1.45), 30px);
+  font-weight: 700;
+  text-align: center;
+  color: #3e2f1c;
+  background: rgba(255, 248, 220, .95);
+  border: 3px solid var(--borda);
+  border-radius: 20px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, .4);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .4);
+}
+
+/* Contagem inicial */
+#overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .7);
+}
+#contadorinicial {
+  font-size: max(48px, calc(var(--u) * 7));
+  color: white;
+  text-shadow: 2px 2px 4px black;
+}
+
+/* Dica de controles */
+#tutorial {
+  position: fixed;
+  z-index: 10001;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(90vw, 40em);
+  padding: .9em 1.5em;
+  font-family: komika, sans-serif;
+  font-size: var(--fs);
+  font-weight: 700;
+  text-align: center;
+  color: var(--marrom);
+  background: rgba(255, 255, 255, .9);
+  border: 3px solid var(--borda);
+  border-radius: 1.5em;
+  box-shadow: .3em .3em .8em rgba(0, 0, 0, .3);
+}
+
+/* Game over */
+.mensagem {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  font-family: sans-serif;
+  background: rgba(0, 0, 0, .7);
+}
+.mensagem h1 {
+  margin: 0;
+  max-width: min(90vw, 28em);
+  padding: .8em 1em;
+  font-size: clamp(1.1rem, calc(var(--u) * 1.8), 2rem);
+  line-height: 1.3;
+  background: #222;
+  border-radius: 12px;
+  box-shadow: 0 0 10px black;
+}
+
+/* Botão "Continuar" ao vencer */
+.final {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 38vh;
+  transform: translateX(-50%);
+  padding: .35em 1em;
+  font-family: komika, sans-serif;
+  font-size: clamp(22px, calc(var(--u) * 2.9), 56px);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #3e2f1c;
+  background: rgba(255, 248, 220, .95);
+  border: 3px solid var(--borda);
+  border-radius: 20px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, .4);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .4);
+}
+.final.visivel { display: block; }
+
+/* Celular em pé: tela estreita = obstáculo demora mais para passar, então o pulo é mais alto
+   (mantém a dificuldade parecida com a do computador) */
+@media (orientation: portrait) {
+  body.dia .jogo { --pulo-h: calc(var(--u) * 30); }
+  body.por-do-sol .jogo,
+  body.noite .jogo { --pulo-h: calc(var(--u) * 28); }
+}

@@ -1,0 +1,54 @@
+.bloco-personagens {
+  display: flex;
+  flex-direction: column;
+  width: min(1400px, 92%);
+  min-height: calc(100dvh - clamp(24px, 6vh, 72px));
+  background: var(--bege);
+  border: 0;
+}
+
+.grade-personagens {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: start;
+  align-content: center;
+  justify-items: center;
+  gap: 0 clamp(4px, 1vw, 20px);
+}
+
+.escolha {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform .2s ease;
+}
+.escolha img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: clamp(90px, 38vh, 400px);
+  object-fit: contain;
+}
+@media (hover: hover) {
+  .escolha:hover { transform: scale(1.1); }
+}
+.escolha:active { transform: scale(.95); }
+.escolha:focus-visible { outline: 3px solid var(--borda); outline-offset: 4px; border-radius: 12px; }
+
+/* Zigue-zague: os personagens pares ficam mais abaixo */
+.escolha:nth-child(even) { margin-top: clamp(36px, 14vh, 160px); }
+
+/* Celular em pé: 2 colunas para os personagens ficarem bem visíveis */
+@media (orientation: portrait) and (max-width: 600px) {
+  .grade-personagens { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2vh 2vw; }
+  .escolha:nth-child(even) { margin-top: 6vh; }
+  .escolha img { max-height: clamp(80px, 22vh, 340px); }
+}

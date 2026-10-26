@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/jogo.css">
+  <link rel="stylesheet" href="css/dialogo.css">
+  <title>Gameplay</title>
+  <script src="js/dialogo.js" defer></script>
+</head>
+<body class="tela-jogo noite" data-alvo="o vilão">
+
+  <a href="jogodois.html" class="back-button fixo" title="Voltar" aria-label="Voltar"><i class="bi bi-arrow-left-short"></i></a>
+  <a href="jogotres.html" class="botao-ui pular" id="botaoPular">Pular</a>
+  <div class="jogo" id="jogo">
+    <div class="estrelas"></div>
+    <img src="imagens/lua.png" alt="" class="lua">
+    <img class="personagem" id="personagem" alt="personagem">
+    <img src="imagens/pirata.png" alt="Pirata" class="npc pirata" id="npc">
+    <div id="mensagem-npc" class="mensagem-npc">
+      <h3 id="texto">
+        Você chegou até a última fase? Impressionante...<br>
+        Mas agora não há mais para onde correr. Este é o meu desafio final, e eu não vou facilitar! Se realmente quer recuperar a receita secreta, prove que é capaz de chegar até o fim.<br>
+        Boa sorte... você vai precisar!
+      </h3>
+      <a href="jogotres.html" id="botaoContinuar" class="botao-ui">Continuar</a>
+    </div>
+  </div>
+
+  <div id="tutorial"></div>
+</body>
+</html>

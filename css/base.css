@@ -1,0 +1,177 @@
+/* =========================================================
+   PALHOÇA RUN — base compartilhada (todas as páginas)
+   Responsivo por design: tamanhos baseados em --u, uma
+   unidade que acompanha a tela (largura OU altura, o que
+   for menor), em vez de um CSS separado para celular.
+   ========================================================= */
+
+@font-face {
+  font-family: komika;
+  src: url(../fontes/komika_axis/KOMIKAX_.ttf) format("truetype");
+  font-display: swap;
+}
+
+:root {
+  /* 1u = 1vw em telas largas, limitada pela altura em telas baixas */
+  --u: min(1vw, 1.78vh);
+  --fs: clamp(13px, calc(var(--u) * 1.25), 28px);   /* texto de diálogo */
+  --btn: clamp(44px, calc(var(--u) * 2.6), 56px);   /* botão voltar */
+
+  --marrom: #3a230e;
+  --marrom-escuro: #3e2f1c;
+  --borda: #8b5e3c;
+  --bege: #fcecc0;
+  --bege-claro: #fff8dc;
+  --dourado: #ffe491;
+  --dourado-hover: #f9d88d;
+  --azul: #173083;
+}
+
+/* Em pé (celular vertical): elementos do jogo ficam 2x maiores em relação à largura */
+@media (orientation: portrait) {
+  :root {
+    --u: min(2vw, 1.78vh);
+    --fs: clamp(14px, 3.8vw, 26px);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: #000;
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--marrom);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Botão voltar ---------- */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--btn);
+  height: var(--btn);
+  border-radius: 50%;
+  background: var(--dourado);
+  color: var(--marrom);
+  font-size: clamp(1.7rem, calc(var(--u) * 1.8), 2.1rem);
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .2);
+  transition: transform .2s ease, background-color .2s ease;
+  z-index: 99999;
+}
+.back-button.fixo {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+}
+@media (hover: hover) {
+  .back-button:hover { background: var(--dourado-hover); color: var(--marrom); transform: scale(1.1); }
+}
+.back-button:active { transform: scale(.94); }
+
+/* ---------- Botão do jogo ---------- */
+.botao-ui {
+  display: inline-block;
+  font-family: komika, sans-serif;
+  font-weight: 700;
+  font-size: var(--fs);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  padding: .6em 1.3em;
+  background: var(--bege);
+  color: var(--marrom);
+  border: 2px solid var(--borda);
+  border-radius: 2em;
+  box-shadow: .1em .1em rgba(0, 0, 0, .3);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+@media (hover: hover) {
+  .botao-ui:hover { background: var(--dourado); color: var(--marrom); }
+}
+
+/* ---------- Menu do topo (Integrantes / Projeto) ---------- */
+.menu-topo {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0 .5rem;
+  list-style: none;
+  background: var(--bege);
+  font-family: komika, sans-serif;
+}
+.menu-topo a {
+  display: flex;
+  align-items: center;
+  gap: .4em;
+  min-height: 44px;
+  padding: .5rem clamp(.6rem, 3vw, 1rem);
+  color: var(--marrom);
+  font-size: clamp(.85rem, 3.6vw, 1rem);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.menu-topo a:hover,
+.menu-topo a:focus-visible { border-bottom-color: var(--marrom); }
+
+/* ---------- Páginas de conteúdo (cartão bege sobre o cenário) ---------- */
+.fundo-cenario::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #000 url("../imagens/cenario.jpeg") center / cover no-repeat;
+}
+.fundo-cenario.escuro::before { filter: brightness(.5); }
+
+.bloco {
+  position: relative;
+  width: min(1100px, 92%);
+  margin: clamp(12px, 3vh, 36px) auto;
+  padding: clamp(14px, 3vw, 32px);
+  background: linear-gradient(180deg, var(--bege-claro) 0%, var(--bege) 100%);
+  border: clamp(2px, .4vw, 5px) solid var(--marrom);
+  border-radius: clamp(20px, 4vw, 48px);
+  box-shadow: clamp(4px, .8vw, 12px) clamp(4px, .8vw, 12px) rgb(45, 33, 1);
+  animation: fadeIn .8s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cabeçalho do cartão: [voltar] [título centralizado] */
+.topo {
+  display: grid;
+  grid-template-columns: var(--btn) 1fr var(--btn);
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: clamp(.75rem, 2.5vh, 1.75rem);
+}
+.topo::after { content: ""; }
+
+.titulo-pagina {
+  margin: 0;
+  color: #756136;
+  font-family: komika, sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.35rem, calc(var(--u) * 2.6), 3.2rem);
+  line-height: 1.15;
+  text-align: center;
+  text-shadow: max(1px, .1vw) max(1px, .1vw) black;
+}

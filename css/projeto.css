@@ -1,0 +1,52 @@
+.secao { margin-bottom: clamp(1rem, 3vh, 2rem); }
+.secao:last-child { margin-bottom: 0; }
+
+/* Em telas largas o texto ocupa 2/3 da largura (como no desenho original) */
+@media (min-width: 768px) {
+  .secao { width: 66.667%; }
+  .secao.direita { margin-left: auto; text-align: right; }
+}
+
+.secao h2 {
+  margin: 0 0 .75rem;
+  color: var(--marrom);
+  font-family: komika, sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.25rem, calc(var(--u) * 1.8), 1.9rem);
+  text-shadow: .05vw .05vw rgba(0, 0, 0, .2);
+  letter-spacing: .05em;
+}
+.secao p { margin: 0 0 1rem; line-height: 1.5; }
+
+.caixa {
+  margin-bottom: 1rem;
+  padding: clamp(12px, 1.5vw, 24px) clamp(14px, 2vw, 28px);
+  background: rgba(255, 255, 255, .7);
+  border-radius: clamp(10px, 1vw, 18px);
+  box-shadow: 0 .3vw .6vw rgba(0, 0, 0, .1);
+}
+.caixa h3 {
+  margin: 0 0 .5rem;
+  font-size: 1.05rem;
+}
+.caixa ul { margin: 0; padding-left: 1.25rem; line-height: 1.45; }
+.caixa li { margin-bottom: .25rem; overflow-wrap: anywhere; }
+
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  min-height: 48px;
+  padding: .5rem 1.2rem;
+  background: var(--dourado);
+  color: var(--marrom);
+  font-family: komika, sans-serif;
+  text-decoration: none;
+  border-radius: 999px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .2);
+  transition: transform .3s ease, background-color .3s ease;
+}
+.instagram-link .bi { font-size: 1.6rem; }
+@media (hover: hover) {
+  .instagram-link:hover { background: var(--dourado-hover); color: var(--marrom); transform: scale(1.05); }
+}

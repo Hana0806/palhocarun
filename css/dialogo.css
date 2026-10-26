@@ -1,0 +1,116 @@
+/* =========================================================
+   Telas de diálogo (fase-um, fase-dois, fase-tres, fase-final)
+   ========================================================= */
+
+/* NPCs */
+.npc {
+  position: absolute;
+  bottom: 0;
+  left: 65%;
+  height: auto;
+  z-index: 2;
+}
+.npc.pescador  { width: calc(var(--u) * 16); }
+.npc.camponesa,
+.npc.pirata    { width: calc(var(--u) * 17); }
+.npc.bau       { width: calc(var(--u) * 12); }
+
+/* Balão de fala */
+.mensagem-npc {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  top: max(12px, 4vh);
+  left: 55%;
+  transform: translateX(-50%);
+  width: 45vw;
+  max-height: max(40dvh, calc(100dvh - var(--u) * 28 - 4vh));
+  overflow-y: auto;
+  padding: .7em 1.1em;
+  font-family: komika, sans-serif;
+  font-size: var(--fs);
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--marrom-escuro);
+  background: var(--bege);
+  border: 3px solid var(--borda);
+  border-radius: 1.5em;
+  box-shadow: .3em .3em .8em rgba(0, 0, 0, .4);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .1);
+}
+.mensagem-npc h3 {
+  margin: 0;
+  font: inherit;
+  white-space: pre-line;
+}
+
+@media (orientation: portrait) {
+  .mensagem-npc {
+    left: 50%;
+    top: max(72px, 8vh);
+    width: min(92vw, 560px);
+  }
+}
+
+#botaoContinuar {
+  display: none;
+  width: max-content;
+  margin: .8em auto 0;
+}
+
+/* Pular */
+.pular {
+  position: fixed;
+  z-index: 9999;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(14px, env(safe-area-inset-right));
+  font-size: clamp(13px, calc(var(--u) * 1.2), 22px);
+  padding: .5em 1.1em;
+}
+
+/* Dica de controles */
+#tutorial {
+  position: absolute;
+  z-index: 10000;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(90vw, 40em);
+  padding: .9em 1.5em;
+  font-family: komika, sans-serif;
+  font-size: var(--fs);
+  font-weight: 700;
+  text-align: center;
+  color: var(--marrom);
+  background: rgba(255, 255, 255, .9);
+  border: 3px solid var(--borda);
+  border-radius: 1.5em;
+  box-shadow: .3em .3em .8em rgba(0, 0, 0, .3);
+  animation: aparecer 1.2s ease;
+}
+@keyframes aparecer {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Celular deitado (pouca altura): balão mais largo e texto mais compacto para caber tudo */
+@media (orientation: landscape) and (max-height: 480px) {
+  .mensagem-npc {
+    width: 72vw;
+    left: 50%;
+    top: 10px;
+    max-height: calc(100dvh - 20px - var(--u) * 16);
+    padding: .5em 1em;
+    font-size: 13px;
+    line-height: 1.25;
+    border-width: 2px;
+  }
+  #botaoContinuar {
+    margin-top: .45em;
+    font-size: 13px;
+    padding: .4em 1.1em;
+  }
+  #tutorial { font-size: 13px; padding: .6em 1.1em; }
+}
